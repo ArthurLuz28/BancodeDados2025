@@ -1,0 +1,127 @@
+/* Lógico_1: */
+
+CREATE TABLE Autor (
+    id_autor int PRIMARY KEY,
+    nome varchar(100),
+    nacionalidade varchar(255),
+    data_de_nascimento date
+);
+
+CREATE TABLE Livro (
+    id_livro int PRIMARY KEY,
+    nome varchar(255),
+    preco decimal(10,2),
+    data_pub date,
+    sinopse Text
+);
+
+CREATE TABLE Cliente (
+    id_cliente int PRIMARY KEY,
+    nome varchar(100),
+    data_nasc date,
+    ativo bit(1),
+    fk_Endereco_id_endereco int
+);
+
+CREATE TABLE Venda (
+    id_venda int PRIMARY KEY,
+    data_venda date,
+    valor_total decimal(10,2),
+    fk_Cliente_id_cliente int
+);
+
+CREATE TABLE Telefone (
+    id_telefone int PRIMARY KEY,
+    num varchar(15),
+    fk_Cliente_id_cliente int
+);
+
+CREATE TABLE Endereco (
+    id_endereco int PRIMARY KEY,
+    rua varchar(255),
+    num varchar(10),
+    bairro varchar(100),
+    cidade varchar(100),
+    cep varchar(9)
+);
+
+CREATE TABLE Item_venda (
+    id_item int PRIMARY KEY,
+    quantidade int,
+    total_item int,
+    fk_Livro_id_livro int
+);
+
+CREATE TABLE genero (
+    codgenero int PRIMARY KEY,
+    genero varchar(255)
+);
+
+CREATE TABLE escreve (
+    fk_Autor_id_autor int,
+    fk_Livro_id_livro int,
+    data_ini date,
+    data_fim date,
+    papel_autor varchar(50),
+    contribuicao text
+);
+
+CREATE TABLE possui (
+    fk_Item_venda_id_item int,
+    fk_Venda_id_venda int
+);
+
+CREATE TABLE pertence (
+    fk_genero_codgenero int,
+    fk_Livro_id_livro int
+);
+ 
+ALTER TABLE Cliente ADD CONSTRAINT FK_Cliente_2
+    FOREIGN KEY (fk_Endereco_id_endereco)
+    REFERENCES Endereco (id_endereco)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Venda ADD CONSTRAINT FK_Venda_2
+    FOREIGN KEY (fk_Cliente_id_cliente)
+    REFERENCES Cliente (id_cliente)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Telefone ADD CONSTRAINT FK_Telefone_2
+    FOREIGN KEY (fk_Cliente_id_cliente)
+    REFERENCES Cliente (id_cliente)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Item_venda ADD CONSTRAINT FK_Item_venda_2
+    FOREIGN KEY (fk_Livro_id_livro)
+    REFERENCES Livro (id_livro)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE escreve ADD CONSTRAINT FK_escreve_1
+    FOREIGN KEY (fk_Autor_id_autor)
+    REFERENCES Autor (id_autor)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE escreve ADD CONSTRAINT FK_escreve_2
+    FOREIGN KEY (fk_Livro_id_livro)
+    REFERENCES Livro (id_livro)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE possui ADD CONSTRAINT FK_possui_1
+    FOREIGN KEY (fk_Item_venda_id_item)
+    REFERENCES Item_venda (id_item)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE possui ADD CONSTRAINT FK_possui_2
+    FOREIGN KEY (fk_Venda_id_venda)
+    REFERENCES Venda (id_venda)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE pertence ADD CONSTRAINT FK_pertence_1
+    FOREIGN KEY (fk_genero_codgenero)
+    REFERENCES genero (codgenero)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE pertence ADD CONSTRAINT FK_pertence_2
+    FOREIGN KEY (fk_Livro_id_livro)
+    REFERENCES Livro (id_livro)
+    ON DELETE RESTRICT;

@@ -1,0 +1,102 @@
+/* Lógico_1: */
+
+CREATE TABLE proprietario (
+    codpro int PRIMARY KEY,
+    nome varchar(255),
+    datacadastro date,
+    email varchar(255),
+    telefone varchar(25),
+    cpf varchar(15),
+    fk_corretor_codcorr int
+);
+
+CREATE TABLE corretor (
+    codcorr int PRIMARY KEY,
+    nome varchar(255),
+    CRECI varchar(20),
+    telefone varchar(25),
+    experiencia varchar(255),
+    cpf varchar(15),
+    fk_endereco_codendereco int
+);
+
+CREATE TABLE imovel (
+    codimovel int PRIMARY KEY,
+    qtdquartos int,
+    qtdgaragem int,
+    qtdbanheiros int,
+    valoraluguel float,
+    ano_construcao date,
+    piscina bit,
+    qtdcameras_seguranca int,
+    fk_proprietario_codpro int,
+    fk_endereco_codendereco int
+);
+
+CREATE TABLE inquilino (
+    codinq int PRIMARY KEY,
+    rg varchar(15),
+    cpf varchar(15),
+    email varchar(255),
+    nome varchar(255),
+    data_nascimento date,
+    telefone varchar(25),
+    fk_corretor_codcorr int
+);
+
+CREATE TABLE endereco (
+    codendereco int PRIMARY KEY,
+    rua varchar(255),
+    bairro varchar(255),
+    cep varchar(255),
+    complemento varchar(255),
+    num varchar(10),
+    uf char(2),
+    cidade varchar(255),
+    pais varchar(255),
+    CEP varchar(9)
+);
+
+CREATE TABLE aluga (
+    fk_imovel_codimovel int,
+    fk_inquilino_codinq int,
+    codaluguel int PRIMARY KEY,
+    contratoanos int,
+    dataaluguel date,
+    datafinalcontrato date
+);
+ 
+ALTER TABLE proprietario ADD CONSTRAINT FK_proprietario_2
+    FOREIGN KEY (fk_corretor_codcorr)
+    REFERENCES corretor (codcorr)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE corretor ADD CONSTRAINT FK_corretor_2
+    FOREIGN KEY (fk_endereco_codendereco)
+    REFERENCES endereco (codendereco)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE imovel ADD CONSTRAINT FK_imovel_2
+    FOREIGN KEY (fk_proprietario_codpro)
+    REFERENCES proprietario (codpro)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE imovel ADD CONSTRAINT FK_imovel_3
+    FOREIGN KEY (fk_endereco_codendereco)
+    REFERENCES endereco (codendereco)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE inquilino ADD CONSTRAINT FK_inquilino_2
+    FOREIGN KEY (fk_corretor_codcorr)
+    REFERENCES corretor (codcorr)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE aluga ADD CONSTRAINT FK_aluga_2
+    FOREIGN KEY (fk_imovel_codimovel)
+    REFERENCES imovel (codimovel)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE aluga ADD CONSTRAINT FK_aluga_3
+    FOREIGN KEY (fk_inquilino_codinq)
+    REFERENCES inquilino (codinq)
+    ON DELETE RESTRICT;
