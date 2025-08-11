@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11/08/2025 às 12:54
+-- Tempo de geração: 11/08/2025 às 13:16
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -36,6 +36,22 @@ CREATE TABLE `atendimento` (
   `codcarro` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `atendimento`
+--
+
+INSERT INTO `atendimento` (`codatendimento`, `totalgeral`, `data`, `codcarro`) VALUES
+(1, 50.00, '2025-01-10', 1),
+(2, 80.00, '2025-01-15', 2),
+(3, 30.00, '2025-02-05', 3),
+(4, 150.00, '2025-02-12', 4),
+(5, 200.00, '2025-03-01', 5),
+(6, 60.00, '2025-03-10', 6),
+(7, 250.00, '2025-03-20', 7),
+(8, 100.00, '2025-04-05', 8),
+(9, 70.00, '2025-04-15', 9),
+(10, 120.00, '2025-04-25', 10);
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +65,22 @@ CREATE TABLE `atendimento_servico` (
   `codservico` int(11) DEFAULT NULL,
   `codatendimento` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `atendimento_servico`
+--
+
+INSERT INTO `atendimento_servico` (`codatend_servico`, `totalserv`, `qtde`, `codservico`, `codatendimento`) VALUES
+(1, 50.00, 1, 2, 1),
+(2, 80.00, 1, 4, 2),
+(3, 30.00, 1, 1, 3),
+(4, 150.00, 1, 9, 4),
+(5, 200.00, 1, 7, 5),
+(6, 60.00, 1, 6, 6),
+(7, 250.00, 1, 10, 7),
+(8, 100.00, 1, 5, 8),
+(9, 70.00, 1, 8, 9),
+(10, 120.00, 1, 3, 10);
 
 -- --------------------------------------------------------
 
@@ -64,6 +96,22 @@ CREATE TABLE `carro` (
   `placa` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `carro`
+--
+
+INSERT INTO `carro` (`codcarro`, `ano`, `codcliente`, `codmodelo`, `placa`) VALUES
+(1, 2020, 1, 1, 'ABC1A23'),
+(2, 2019, 2, 2, 'DEF4B56'),
+(3, 2021, 3, 3, 'GHI7C89'),
+(4, 2018, 4, 4, 'JKL0D12'),
+(5, 2022, 5, 5, 'MNO3E45'),
+(6, 2020, 6, 6, 'PQR6F78'),
+(7, 2017, 7, 7, 'STU9G01'),
+(8, 2019, 8, 8, 'VWX2H34'),
+(9, 2021, 9, 9, 'YZA5I67'),
+(10, 2018, 10, 10, 'BCD8J90');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +126,22 @@ CREATE TABLE `cliente` (
   `email` varchar(100) NOT NULL,
   `codendereco` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `cliente`
+--
+
+INSERT INTO `cliente` (`codcliente`, `nome`, `datanascimento`, `telefone`, `email`, `codendereco`) VALUES
+(1, 'João Silva', '1985-04-15', '1198765432', 'joao.silva@email.com', 1),
+(2, 'Maria Oliveira', '1990-08-20', '2198765432', 'maria.oliveira@email.com', 2),
+(3, 'Carlos Souza', '1978-11-05', '3198765432', 'carlos.souza@email.com', 3),
+(4, 'Ana Santos', '1995-02-12', '4198765432', 'ana.santos@email.com', 4),
+(5, 'Paulo Lima', '1982-06-25', '8198765432', 'paulo.lima@email.com', 5),
+(6, 'Fernanda Costa', '1989-09-30', '2191234567', 'fernanda.costa@email.com', 6),
+(7, 'Rafael Alves', '1993-01-18', '4191234567', 'rafael.alves@email.com', 7),
+(8, 'Luciana Martins', '1980-12-01', '3191234567', 'luciana.martins@email.com', 8),
+(9, 'Bruno Rocha', '1998-03-08', '8191234567', 'bruno.rocha@email.com', 9),
+(10, 'Camila Ferreira', '1992-07-22', '1191234567', 'camila.ferreira@email.com', 10);
 
 -- --------------------------------------------------------
 
@@ -95,6 +159,22 @@ CREATE TABLE `endereco` (
   `cep` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `endereco`
+--
+
+INSERT INTO `endereco` (`codendereco`, `rua`, `num`, `bairro`, `cidade`, `estado`, `cep`) VALUES
+(1, 'Rua das Flores', '101', 'Centro', 'São Paulo', 'SP', '01001000'),
+(2, 'Av. Paulista', '200', 'Bela Vista', 'São Paulo', 'SP', '01311000'),
+(3, 'Rua Aroeiras', '345', 'Jardim', 'Campinas', 'SP', '13015000'),
+(4, 'Rua Palmeiras', '50', 'Centro', 'Santos', 'SP', '11010000'),
+(5, 'Rua das Acácias', '78', 'Boa Vista', 'Recife', 'PE', '50050000'),
+(6, 'Av. Brasil', '1500', 'Copacabana', 'Rio de Janeiro', 'RJ', '22041001'),
+(7, 'Rua Verde', '23', 'Centro', 'Curitiba', 'PR', '80010000'),
+(8, 'Rua Azul', '67', 'Industrial', 'Betim', 'MG', '32600000'),
+(9, 'Rua Amarela', '12', 'Centro', 'Fortaleza', 'CE', '60060000'),
+(10, 'Av. Atlântica', '890', 'Meia Praia', 'Itapema', 'SC', '88220000');
+
 -- --------------------------------------------------------
 
 --
@@ -105,6 +185,22 @@ CREATE TABLE `marca` (
   `codmarca` int(11) NOT NULL,
   `marca` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `marca`
+--
+
+INSERT INTO `marca` (`codmarca`, `marca`) VALUES
+(1, 'Chevrolet'),
+(2, 'Volkswagen'),
+(3, 'Fiat'),
+(4, 'Ford'),
+(5, 'Honda'),
+(6, 'Toyota'),
+(7, 'Hyundai'),
+(8, 'Renault'),
+(9, 'Nissan'),
+(10, 'Peugeot');
 
 -- --------------------------------------------------------
 
@@ -118,6 +214,22 @@ CREATE TABLE `modelo` (
   `codmarca` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `modelo`
+--
+
+INSERT INTO `modelo` (`codmodelo`, `modelo`, `codmarca`) VALUES
+(1, 'Onix', 1),
+(2, 'Gol', 2),
+(3, 'Argo', 3),
+(4, 'Ka', 4),
+(5, 'Civic', 5),
+(6, 'Corolla', 6),
+(7, 'HB20', 7),
+(8, 'Sandero', 8),
+(9, 'Versa', 9),
+(10, '208', 10);
+
 -- --------------------------------------------------------
 
 --
@@ -129,6 +241,22 @@ CREATE TABLE `servico` (
   `servico` varchar(100) NOT NULL,
   `valor` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `servico`
+--
+
+INSERT INTO `servico` (`codservico`, `servico`, `valor`) VALUES
+(1, 'Lavagem Simples', 30.00),
+(2, 'Lavagem Completa', 50.00),
+(3, 'Polimento', 120.00),
+(4, 'Higienização Interna', 80.00),
+(5, 'Enceramento', 100.00),
+(6, 'Lavagem a Seco', 60.00),
+(7, 'Cristalização de Pintura', 200.00),
+(8, 'Limpeza de Motor', 70.00),
+(9, 'Descontaminação de Pintura', 150.00),
+(10, 'Vitrificação', 250.00);
 
 --
 -- Índices para tabelas despejadas
@@ -197,49 +325,49 @@ ALTER TABLE `servico`
 -- AUTO_INCREMENT de tabela `atendimento`
 --
 ALTER TABLE `atendimento`
-  MODIFY `codatendimento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codatendimento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `atendimento_servico`
 --
 ALTER TABLE `atendimento_servico`
-  MODIFY `codatend_servico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codatend_servico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `carro`
 --
 ALTER TABLE `carro`
-  MODIFY `codcarro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codcarro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `codcliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `codendereco` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codendereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `codmarca` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codmarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `modelo`
 --
 ALTER TABLE `modelo`
-  MODIFY `codmodelo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codmodelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `servico`
 --
 ALTER TABLE `servico`
-  MODIFY `codservico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codservico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restrições para tabelas despejadas
