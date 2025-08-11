@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/08/2025 às 04:37
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Tempo de geração: 11/08/2025 às 12:54
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,10 +58,10 @@ CREATE TABLE `atendimento_servico` (
 
 CREATE TABLE `carro` (
   `codcarro` int(11) NOT NULL,
-  `ano` date NOT NULL,
+  `ano` int(11) NOT NULL,
   `codcliente` int(11) DEFAULT NULL,
   `codmodelo` int(11) DEFAULT NULL,
-  `placa` int(11) NOT NULL
+  `placa` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -72,10 +72,10 @@ CREATE TABLE `carro` (
 
 CREATE TABLE `cliente` (
   `codcliente` int(11) NOT NULL,
-  `nome` varchar(255) NOT NULL,
+  `nome` varchar(100) NOT NULL,
   `datanascimento` date NOT NULL,
   `telefone` varchar(10) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `codendereco` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -87,11 +87,11 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `endereco` (
   `codendereco` int(11) NOT NULL,
-  `rua` varchar(255) NOT NULL,
-  `num` varchar(255) NOT NULL,
-  `bairro` varchar(255) NOT NULL,
-  `cidade` varchar(255) NOT NULL,
-  `estado` varchar(255) NOT NULL,
+  `rua` varchar(100) NOT NULL,
+  `num` varchar(10) NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `cidade` varchar(50) NOT NULL,
+  `estado` char(2) NOT NULL,
   `cep` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -103,7 +103,7 @@ CREATE TABLE `endereco` (
 
 CREATE TABLE `marca` (
   `codmarca` int(11) NOT NULL,
-  `marca` varchar(255) NOT NULL
+  `marca` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -114,7 +114,7 @@ CREATE TABLE `marca` (
 
 CREATE TABLE `modelo` (
   `codmodelo` int(11) NOT NULL,
-  `modelo` varchar(255) NOT NULL,
+  `modelo` varchar(50) NOT NULL,
   `codmarca` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -126,7 +126,7 @@ CREATE TABLE `modelo` (
 
 CREATE TABLE `servico` (
   `codservico` int(11) NOT NULL,
-  `servico` varchar(255) NOT NULL,
+  `servico` varchar(100) NOT NULL,
   `valor` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
